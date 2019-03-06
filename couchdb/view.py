@@ -10,6 +10,7 @@
 """Implementation of a view server for functions written in Python."""
 
 from codecs import BOM_UTF8
+import io
 import logging
 import os
 import sys
@@ -134,10 +135,8 @@ def run(input=sys.stdin, output=None):
                 'reduce': reduce, 'rereduce': rereduce}
 
     try:
-        while True:
-            line = input.readline()
-            if not line:
-                break
+        input_stream = io.TextIOWrapper(sys.stdin.buffer, encoding=('utf-8'))
+        for line in input_stream:
             try:
                 cmd = json.decode(line)
                 log.debug('Processing %r', cmd)
