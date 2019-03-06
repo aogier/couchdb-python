@@ -135,7 +135,7 @@ def run(input=sys.stdin, output=None):
                 'reduce': reduce, 'rereduce': rereduce}
 
     try:
-        input_stream = io.TextIOWrapper(sys.stdin.buffer, encoding=('utf-8'))
+        input_stream = io.TextIOWrapper(input.buffer, encoding=('utf-8'))
         for line in input_stream:
             try:
                 cmd = json.decode(line)
